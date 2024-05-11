@@ -9,8 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import express from 'express';
 import { get_lyrics } from './lyrics.js';
+import cors from 'cors';
 const API_KEY = "1AqF1vBdyL1PRwnyWdxgj8r2nBtBZBnHrJL9Y2azkdne04F-FzOUBzSyATmgGqKA";
 const app = express();
+app.use(cors());
 app.use(express.json());
 /* const HandleBest = async (req: Request, res: Response, next: Function) => {
   const data = req.body;
@@ -39,7 +41,7 @@ const MyMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         artist: artist,
         optimizeQuery: true });
     res.json(lyrics);
-    yield fetch('http://localhost:5000/calcul', {
+    yield fetch('http://127.0.0.1:5000/calcul', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -1,9 +1,14 @@
 import express, { Request, Response } from 'express';
 import { get_lyrics } from './lyrics.js';
+import cors from 'cors';
 
 const API_KEY = "1AqF1vBdyL1PRwnyWdxgj8r2nBtBZBnHrJL9Y2azkdne04F-FzOUBzSyATmgGqKA";
 
 const app = express();
+
+
+
+app.use(cors());
 
 app.use(express.json());
 
@@ -34,7 +39,7 @@ const MyMiddleware = async (req: Request, res: Response, next: Function) => {
     artist: artist,
     optimizeQuery: true});
     res.json(lyrics);
-    await fetch('http://localhost:5000/calcul', {
+    await fetch('http://127.0.0.1:5000/calcul', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

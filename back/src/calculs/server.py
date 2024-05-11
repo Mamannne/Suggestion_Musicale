@@ -2,8 +2,10 @@ from flask import request, jsonify, Flask
 from main import best as _best
 import json
 import requests
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 best_suggest = None
 
