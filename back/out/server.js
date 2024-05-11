@@ -12,6 +12,16 @@ import { get_lyrics } from './lyrics.js';
 const API_KEY = "1AqF1vBdyL1PRwnyWdxgj8r2nBtBZBnHrJL9Y2azkdne04F-FzOUBzSyATmgGqKA";
 const app = express();
 app.use(express.json());
+/* const HandleBest = async (req: Request, res: Response, next: Function) => {
+  const data = req.body;
+  app.get('/BEST', (req: Request, res: Response) => {
+    res.send(data);
+  });
+  console.log('data sent');
+  //console.log('got out')
+  next();
+}
+  */
 const MyMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
     const artist = data.artiste;
@@ -29,9 +39,25 @@ const MyMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         artist: artist,
         optimizeQuery: true });
     res.json(lyrics);
+    yield fetch('http://localhost:5000/calcul', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ lyrics: lyrics })
+    });
     //console.log('got out')
     next();
 });
+/* app.get('/BEST', HandleBest, (req: Request, res: Response) => {
+  console.log(req.body);
+  res.end();
+}); */
+/* app.patch('/BEST', (req: Request, res: Response) => {
+  let best = req.body;
+  console.log(best);
+  res.send('Hello World!');
+}); */
 app.get('/get', (req, res) => {
     res.send('Hello World!');
 });
