@@ -37,7 +37,7 @@ class App {
     const title = (document.querySelector('input[placeholder="Titre"]') as HTMLInputElement).value;
     const data = {'artiste': artist, 'titre': title};
     let container = document.getElementById('container');
-    container.innerHTML = 'L\'attente dure environ 30s';
+    container.innerHTML = `<p style="font-size: 24px;">Le temps d'attente est généralement de 30s<p>`
     this.send(data);
   };
 
@@ -78,7 +78,14 @@ class App {
         const best = data['best_suggest'];
         console.log(best);
         let container = document.getElementById('container');
-        container.innerHTML = `La suggestion la plus pertinente est : ${best}`;
+        //container.innerHTML = `La suggestion la plus pertinente est : ${best}`;
+        container.innerHTML = `<p style="font-size: 24px;">La suggestion la plus pertinente est : ${best}</p>`;
+        const reloadButton = document.createElement('button');
+        reloadButton.textContent = 'Redo';
+        reloadButton.addEventListener('click', () => {
+          location.reload();
+        });
+        container.appendChild(reloadButton);
       }).catch(error => {
         // handle errors
         console.error('Error:', error);
